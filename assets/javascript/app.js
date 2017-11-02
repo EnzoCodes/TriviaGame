@@ -13,7 +13,7 @@ var counter; // For time bar and timer display
 var subButton;
 var questionList = [];
 var holdAnswer;
-var qcounter;
+var qcounter = 0;
 
 
 
@@ -73,6 +73,18 @@ $(document).ready(function() {
 function getAnswer() {
     Uinput = $('#answerField').val();
     console.log(Uinput);
+    // 3 if else WIN -
+    // if timer = 0 || submitLetter != answer -- loss
+    // you ran out time OR you didnt answer correct...
+    // change qCounter++
+
+    if (Uinput === qA[0].answer) {
+
+    };
+};
+
+function timeRunOut(){
+    // change qCounter++
 };
 
 subButton = $('#subButton');
@@ -99,55 +111,28 @@ $(subButton).on('click', getAnswer);
         }, 1000);
         // End Countdown Section
 
-        //Populate Screen
-        setTimeout(function() {
-                var qcounter = 0;
-                var qDisplay = (qA[qcounter].question);
-                $("#question").html(qDisplay);
 
-                var aDisplay = (qA[qcounter].answers[0]);
-                for (var x in aDisplay) {
-                    $("#quiz").append(x + ". " + aDisplay[x] + "<br>");
-                }
-                qcounter++;
-            }, 10000);
-
-            var intervalClear = setTimeout(function() {
-                interval;
-                $("#progressBarIn").empty('inside');
-
-                if (counter === 0) {
-                    $("#question").empty();
-                    $("#quize").empty();
-                }
-            }, 1000);
+        $("#progressBarIn").empty('inside');
+        if (qcounter === 0) {
+            $("#question").empty();
+            $("#quize").empty();
+        }
 
 
-    };
+
+    }; // End displayMain
+
+    function displayQ() {
+        var qDisplay = (qA[qcounter].question);
+        $("#question").html(qDisplay);
+
+        var aDisplay = (qA[qcounter].answers[0]);
+        for (var x in aDisplay) {
+            $("#quiz").append(x + ". " + aDisplay[x] + "<br>");
+        }
+    }; // end DisplayQ
+
     displayMain();
-}); //End document.ready function...
+    displayQ();
 
-
-
-
-// Main problems ==
-// 1. Can't figure out how to print Array[{object.key{answer}}]
-// 2. Inserting delay into for loop....
-// 3. storing value of form field...
-
-
-
-
-
-// qA[0].question = "what color..."
-// qA[0].answer = "c"
-// qA[1].question = "David's father..."
-// Syntax for looking through Array of Objects...
-
-//
-// for (var i = 0; i < qA.length; i++) {
-//     //generate questions
-//     $("#question").html(qA[0].question);
-//     //generate formn field
-//     $("#answerList").html(qA[0].answers);
-//     //generate button
+});
