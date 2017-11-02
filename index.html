@@ -6,7 +6,7 @@
         <title>Quiz Game</title>
     </head>
     <body>
-        <header><h1>Quiz Game - Read Carefully!</h1></header>
+        <header><h1 class="heading">Quiz Game - Read Carefully!</h1></header>
         <div class="wrapper">
             <p> Time Remaining: <span id="countDown"></span> s<p>
             <div id="progressBar">
@@ -27,9 +27,9 @@
                     <button id='subButton' type='button'>Submit letter!</button>
                 </div>
             </form>
-
-            <div id="win"></div>
-            <div id="loss"></div>
+            <div id="timeout"></div>
+            <div>Correct: <span id="win"></span></div>
+            <div>Wrong: <span id="loss"></span></div>
 
         </div>
     <!-- jQuery -->

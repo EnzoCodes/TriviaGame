@@ -9,11 +9,12 @@ var qA;
 var correct = "<img src=assets/images/green.png>";
 var incorrect = "<img src=assets/images/red.png>";
 var count; // For manual for loop iteration.
-var counter; // For time bar and timer display
+var counter; // For time bar and timer display ONLY
+var qcounter; // for updating stuff
 var subButton;
 var questionList = [];
 var holdAnswer;
-var qcounter = 0;
+var timeOutText = "You ran out of time!";
 
 
 
@@ -23,8 +24,6 @@ $(document).ready(function() {
     win = 0;
     loss = 0;
     count = 0;
-    holdAnswer = [];
-    questionList = [];
     answersDisplay = $("#answersList");
     qA_display = $("#question");
     //Array of OBJECTS...
@@ -70,25 +69,36 @@ $(document).ready(function() {
 //                question[i] looks at the question.
 //                      value looks at the Users's input.
 
-function getAnswer() {
-    Uinput = $('#answerField').val();
-    console.log(Uinput);
-    // 3 if else WIN -
-    // if timer = 0 || submitLetter != answer -- loss
-    // you ran out time OR you didnt answer correct...
-    // change qCounter++
-
-    if (Uinput === qA[0].answer) {
-
+    function getAnswer() {
+        Uinput = $('#answerField').val();
+        console.log(Uinput);
+        // 3 if else WIN -
+        // if timer = 0 || submitLetter != answer -- loss
+        // you ran out time OR you didnt answer correct...
+        // change qCounter++
+        if (Uinput === qA[count].answer) {
+            win++
+            $("#win").text(win);
+            // Also update DOM with image
+            counter = 10
+            count++
+            $("#progressBarIn").empty('inside');
+            $("#quiz").empty();
+            $("#question").empty();
+        } else if (counter === 0 || Uinput != qA[count].answer) {
+            loss++
+            $("#loss").text(loss);
+            //Update with loss image
+            count++
+            counter = 10;
+            $("#progressBarIn").empty('inside');
+            $("#quiz").empty();
+            $("#question").empty();
+        }
     };
-};
 
-function timeRunOut(){
-    // change qCounter++
-};
-
-subButton = $('#subButton');
-$(subButton).on('click', getAnswer);
+    subButton = $('#subButton');
+    $(subButton).on('click', getAnswer);
 
 
 // Countdown... for some reason it goes negative too...
@@ -96,8 +106,6 @@ $(subButton).on('click', getAnswer);
     function displayMain(){
         //first function, number of times it runs....
         counter = 10;
-        //second function, number of times it runs...
-        count = qA.length; //3
 
         var interval = setInterval(function() {
             counter--;
@@ -110,23 +118,13 @@ $(subButton).on('click', getAnswer);
             }
         }, 1000);
         // End Countdown Section
-
-
-        $("#progressBarIn").empty('inside');
-        if (qcounter === 0) {
-            $("#question").empty();
-            $("#quize").empty();
-        }
-
-
-
     }; // End displayMain
 
     function displayQ() {
-        var qDisplay = (qA[qcounter].question);
-        $("#question").html(qDisplay);
+        var text = (qA[count].question);
+        $("#question").html(text);
 
-        var aDisplay = (qA[qcounter].answers[0]);
+        var aDisplay = (qA[count].answers[0]);
         for (var x in aDisplay) {
             $("#quiz").append(x + ". " + aDisplay[x] + "<br>");
         }
@@ -134,5 +132,8 @@ $(subButton).on('click', getAnswer);
 
     displayMain();
     displayQ();
-
 });
+
+
+//changing qcounter to count may have broken whole thing...
+// Still not iterating showing next question right...
