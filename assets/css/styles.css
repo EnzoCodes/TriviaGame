@@ -1,11 +1,18 @@
 
 /* 002FCF */
 /* D73015 */
+*{
+    font-family: sans-serif;
+    margin: 0 auto;
+}
 
 body {
     margin: 0 auto;
     max-width: 40%;
+    background-color: #CAEBF2;
+    color: #A9A9A9;
 }
+
 
 .form-answer {
     border-bottom: 15px;
@@ -15,8 +22,13 @@ body {
     border-bottom: 15px;
 }
 
+.start {
 
-.wrapper {
+}
+
+
+.wrapper{
+
 }
 
 #question {
@@ -43,7 +55,7 @@ body {
 .bar .inside {
         animation: fill 30s linear 1;
         height: 100%;
-        background-color: firebrick;
+        background-color: #813772;
 }
 
 @keyframes fill {
