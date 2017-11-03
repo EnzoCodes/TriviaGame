@@ -2,9 +2,21 @@
 /* 002FCF */
 /* D73015 */
 
+body {
+    margin: 0 auto;
+    max-width: 40%;
+}
+
+.form-answer {
+    border-bottom: 15px;
+}
+
+#timer, #win, #loss {
+    border-bottom: 15px;
+}
+
 
 .wrapper {
-    margin: 0 auto;
 }
 
 #question {
@@ -29,7 +41,7 @@
   }
 
 .bar .inside {
-        animation: fill 9s linear 1;
+        animation: fill 30s linear 1;
         height: 100%;
         background-color: firebrick;
 }
